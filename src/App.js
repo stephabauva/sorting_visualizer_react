@@ -8,6 +8,7 @@ function App(props) {
     <SimpleMenu
     id = {menu.id}
     sort_cat = {menu.sort_cat}
+    sort_algo = {menu.sort_algo}
     key = {menu.id}
     />
   ));

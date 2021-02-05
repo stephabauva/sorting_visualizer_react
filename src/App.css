@@ -15,6 +15,7 @@
   float: left;
   overflow: auto;
   padding: 10px;
+  margin-left: 80px;
 }
 
 .slider-container {
@@ -25,6 +26,7 @@
 .generate-list {
   /* border: 1px solid purple; */
   margin: 10px;
+  margin-left: 20px;
   min-height: 30px;
   min-width: 30px;
   float:right;
@@ -32,7 +34,9 @@
 
 .button-menus {
   /* border: 1px solid red; */
-  margin: 23px 50px  20px  20px;
+  margin: 20px 50px  20px  20px;
+  background-color: rgb(148, 247, 247);
+  border-radius: 3%;
   float:left;
 }
 
