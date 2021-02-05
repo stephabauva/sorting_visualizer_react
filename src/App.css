@@ -1,26 +1,39 @@
 .App {
   text-align: center;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
 
 #topbar {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   overflow: auto;
   min-height: 20px;
 
 }
 
-.button-menus {
-  border: 1px solid red;
-  margin: 5px;
-  /* position:absolute; */
+#slider-button-container {
+  /* border: 2px solid orange; */
+  float: left;
+  overflow: auto;
+  padding: 10px;
+}
+
+.slider-container {
+  /* border: 1px solid rgb(255, 251, 0); */
   float:left;
 }
 
 .generate-list {
-  border: 1px solid purple;
-  margin: 5px;
+  /* border: 1px solid purple; */
+  margin: 10px;
   min-height: 30px;
   min-width: 30px;
+  float:right;
+}
+
+.button-menus {
+  /* border: 1px solid red; */
+  margin: 23px 50px  20px  20px;
   float:left;
 }
+
+

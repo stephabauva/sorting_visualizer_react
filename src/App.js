@@ -1,5 +1,6 @@
 import SimpleMenu from "./components/Menu"
 import GenerateList from "./GenerateList"
+import InputSlider from "./slider"
 import './App.css';
 
 function App(props) {
@@ -16,7 +17,10 @@ function App(props) {
         <h1>Sorting Visualizer</h1>
       </div>
         <div id="topbar">
-          <GenerateList />
+            <div id="slider-button-container">
+            <InputSlider />
+            <GenerateList />
+          </div>
           {menuList}
         </div>
     </div>
