@@ -4,9 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const SORT_MENUS = [
+  {id:"menu_sort_0", sort_cat:"Simple Sorts"},
+  {id:"menu_sort_1", sort_cat:"Efficient Sorts"},
+  {id:"menu_sort_2", sort_cat:"Bubble Sorts"},
+  {id:"menu_sort_4", sort_cat:"Distribution Sorts"},
+]
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App menus={SORT_MENUS}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
