@@ -8,10 +8,10 @@ function App(props) {
   const [size, setSize] = useState(0);
   console.log(size);
 
-  function getArraySize(ArraySize) {
+  function getArraySize(ArraySize) { //update size so the slider does not move when dom re-renders
     const newSize = {ArraySize};
-  //   setSize(newSize);
-    console.log(newSize);
+    setSize([size, newSize]);
+    console.log(ArraySize);
   }
 
   const menuList = props.menus.map(menu => (
