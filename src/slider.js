@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-
+import GenerateList from "./GenerateList"
 const useStyles = makeStyles({
   root: {
     width: 250,
@@ -20,7 +20,7 @@ export default function InputSlider(props) {
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
-    props.getArraySize(newValue);
+    // props.getArraySize(newValue);
   };
 
   const handleInputChange = (event) => {
@@ -68,6 +68,8 @@ export default function InputSlider(props) {
             </Grid>
         </Grid>
         </div>
+        <GenerateList ArraySize={value}/>
     </div>
+    
   );
 }

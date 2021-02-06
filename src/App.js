@@ -5,14 +5,13 @@ import './App.css';
 import React, { useState } from "react";
 
 function App(props) {
-  const [size, setSize] = useState(0);
-  console.log(size);
+  // const [size, setSize] = useState(0);
 
-  function getArraySize(ArraySize) { //update size so the slider does not move when dom re-renders
-    const newSize = {ArraySize};
-    setSize([size, newSize]);
-    console.log(ArraySize);
-  }
+  // function getArraySize(ArraySize) { //update size so the slider does not move when dom re-renders
+  //   const newSize = {ArraySize};
+  //   setSize([size, newSize]);
+  //   // console.log(newSize.ArraySize);
+  // }
 
   const menuList = props.menus.map(menu => (
     <SimpleMenu
@@ -29,8 +28,8 @@ function App(props) {
       </div>
         <div id="topbar">
             <div id="slider-button-container">
-            <InputSlider getArraySize={getArraySize}/>
-            <GenerateList />
+            <InputSlider />
+            
           </div>
           {menuList}
         </div>
