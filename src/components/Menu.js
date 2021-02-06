@@ -17,7 +17,7 @@ export default function SimpleMenu(props) {
 //   const id = props.id;
   const sort_cat = props.sort_cat;
   const sort_algo = props.sort_algo;
-  console.log(sort_algo);
+  // console.log(sort_algo);
 
   return (
     <div className="button-menus">

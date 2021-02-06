@@ -2,8 +2,18 @@ import SimpleMenu from "./components/Menu"
 import GenerateList from "./GenerateList"
 import InputSlider from "./slider"
 import './App.css';
+import React, { useState } from "react";
 
 function App(props) {
+  const [size, setSize] = useState(0);
+  console.log(size);
+
+  function getArraySize(ArraySize) {
+    const newSize = {ArraySize};
+  //   setSize(newSize);
+    console.log(newSize);
+  }
+
   const menuList = props.menus.map(menu => (
     <SimpleMenu
     id = {menu.id}
@@ -19,7 +29,7 @@ function App(props) {
       </div>
         <div id="topbar">
             <div id="slider-button-container">
-            <InputSlider />
+            <InputSlider getArraySize={getArraySize}/>
             <GenerateList />
           </div>
           {menuList}

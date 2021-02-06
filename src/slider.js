@@ -14,23 +14,25 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InputSlider() {
+export default function InputSlider(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState(0);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+    props.getArraySize(newValue);
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
+    props.getArraySize(event.target.value);
   };
 
   const handleBlur = () => {
     if (value < 0) {
       setValue(0);
-    } else if (value > 100) {
-      setValue(100);
+    } else if (value > 300) {
+      setValue(300);
     }
   };
 
@@ -58,7 +60,7 @@ export default function InputSlider() {
                 inputProps={{
                 step: 10,
                 min: 0,
-                max: 100,
+                max: 300,
                 type: 'number',
                 'aria-labelledby': 'input-slider',
                 }}
