@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import listReducer from './redux/Reducer';
 
+//customMiddleWare gets triggered when the the value of the list in the store changes
+//just for demo, not affecting any component
 const customMiddleWare = store => next => action => {
     console.log("Middleware triggered:", action);
     next(action);

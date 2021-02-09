@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { Provider } from "react-redux";
-import store from './store'
 import reportWebVitals from './reportWebVitals';
 
 const SORT_MENUS = [
@@ -14,9 +12,7 @@ const SORT_MENUS = [
 ]
 
 ReactDOM.render(
-  <React.StrictMode>
-      <App menus={SORT_MENUS}/>
-  </React.StrictMode>,
+      <App menus={SORT_MENUS}/>,
   document.getElementById('root')
 );
 

@@ -5,10 +5,8 @@ import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 
 import React from 'react';
-// import listReducer from '../redux/reducer';
-// import setRawList from '../redux/action';
+
 import store from '../store'
-import SortingVisualizer from "../sortingVisualizer/SortingVisualizer"
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +21,6 @@ export default function InputSlider(props) {
   const classes = useStyles(); //material-ui
 
   const [sliderValue, setSliderValue] = React.useState(0);
-  // const array = state.listReducer.listState;
 
   const handleSliderChange = (event, newValue) => {
     console.log(newValue);
