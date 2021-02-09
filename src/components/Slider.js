@@ -20,13 +20,17 @@ const useStyles = makeStyles({
 export default function InputSlider(props) {
   const classes = useStyles(); //material-ui
 
+  // create inital slider value (0) and a function to update it
   const [sliderValue, setSliderValue] = React.useState(0);
 
+  //handleSliderChange gets the value from the slider
   const handleSliderChange = (event, newValue) => {
     console.log(newValue);
     if (newValue > 0) {
-      setSliderValue(newValue);
+      setSliderValue(newValue); //updates the previous value of the slider
+      // create a liste of random number with length of newValue
       const newArray = [...Array(newValue)].map(_=>Math.ceil(Math.random()*300));
+      // dispatch the new list: update the store with our new list
       store.dispatch({
         type: 'SET_LIST',
         payload: newArray
@@ -36,7 +40,6 @@ export default function InputSlider(props) {
 
   const handleInputChange = (event, newValue) => {
     setSliderValue(event.target.sliderValue === '' ? '' : Number(event.target.sliderValue));
-    // props.getArraySize(event.target.sliderValue);
   };
 
   const handleBlur = () => {
@@ -79,7 +82,6 @@ export default function InputSlider(props) {
             </Grid>
         </Grid>
         </div>
-        {/* <div><SortingVisualizer /></div> */}
     </div>
     
     
