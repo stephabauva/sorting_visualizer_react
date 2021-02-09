@@ -1,10 +1,15 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-import GenerateList from "./GenerateList"
+
+import React from 'react';
+// import listReducer from '../redux/reducer';
+// import setRawList from '../redux/action';
+import store from '../store'
+import SortingVisualizer from "../sortingVisualizer/SortingVisualizer"
+
 const useStyles = makeStyles({
   root: {
     width: 250,
@@ -15,24 +20,33 @@ const useStyles = makeStyles({
 });
 
 export default function InputSlider(props) {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const classes = useStyles(); //material-ui
+
+  const [sliderValue, setSliderValue] = React.useState(0);
+  // const array = state.listReducer.listState;
 
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-    // props.getArraySize(newValue);
+    console.log(newValue);
+    if (newValue > 0) {
+      setSliderValue(newValue);
+      const newArray = [...Array(newValue)].map(_=>Math.ceil(Math.random()*300));
+      store.dispatch({
+        type: 'SET_LIST',
+        payload: newArray
+      })
+    };
   };
 
-  const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-    props.getArraySize(event.target.value);
+  const handleInputChange = (event, newValue) => {
+    setSliderValue(event.target.sliderValue === '' ? '' : Number(event.target.sliderValue));
+    // props.getArraySize(event.target.sliderValue);
   };
 
   const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 300) {
-      setValue(300);
+    if (sliderValue < 0) {
+      setSliderValue(0);
+    } else if (sliderValue > 300) {
+      setSliderValue(300);
     }
   };
 
@@ -45,7 +59,7 @@ export default function InputSlider(props) {
         <Grid container spacing={2} alignItems="center">
             <Grid item xs>
             <Slider
-                value={typeof value === 'number' ? value : 0}
+                value={typeof sliderValue === 'number' ? sliderValue : 0}
                 onChange={handleSliderChange}
                 aria-labelledby="input-slider"
             />
@@ -53,13 +67,13 @@ export default function InputSlider(props) {
             <Grid item>
             <Input
                 className={classes.input}
-                value={value}
+                value={sliderValue}
                 margin="dense"
                 onChange={handleInputChange}
                 onBlur={handleBlur}
                 inputProps={{
-                step: 10,
-                min: 0,
+                step: 1,
+                min: 10,
                 max: 300,
                 type: 'number',
                 'aria-labelledby': 'input-slider',
@@ -68,8 +82,9 @@ export default function InputSlider(props) {
             </Grid>
         </Grid>
         </div>
-        <GenerateList ArraySize={value}/>
+        {/* <div><SortingVisualizer /></div> */}
     </div>
+    
     
   );
 }

@@ -1,11 +1,11 @@
 import SimpleMenu from "./components/Menu"
-import GenerateList from "./GenerateList"
-import InputSlider from "./slider"
+import InputSlider from "./components/Slider"
+import SortingVisualizer from "./sortingVisualizer/SortingVisualizer"
 import './App.css';
-import React, { useState } from "react";
+import React from "react";
 
 function App(props) {
-  // const [size, setSize] = useState(0);
+  // const [size, setSize] = useState([]);
 
   // function getArraySize(ArraySize) { //update size so the slider does not move when dom re-renders
   //   const newSize = {ArraySize};
@@ -28,10 +28,12 @@ function App(props) {
       </div>
         <div id="topbar">
             <div id="slider-button-container">
-            <InputSlider />
-            
+              <InputSlider />
           </div>
           {menuList}
+          <div id="visuzalier-container">
+            <SortingVisualizer />
+          </div>
         </div>
     </div>
 

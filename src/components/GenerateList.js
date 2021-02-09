@@ -9,7 +9,7 @@ export default function GenerateList(props) {
   const createRandomNumber = (event) => {
     if (size > 0) {
       const myArray = [...Array(size)].map(_=>Math.ceil(Math.random()*300));
-      console.log(myArray);
+      // console.log(myArray);
     };
     
   };
