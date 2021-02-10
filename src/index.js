@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './store'
+import { Provider } from "react-redux";
 
 const SORT_MENUS = [
   {id:"menu_sort_0", sort_cat:"Simple Sorts", sort_algo:["Insertion Sort", "Selection Sort"]},
@@ -12,7 +14,9 @@ const SORT_MENUS = [
 ]
 
 ReactDOM.render(
+  <Provider store={store}>
       <App menus={SORT_MENUS}/>,
+    </Provider>,
   document.getElementById('root')
 );
 

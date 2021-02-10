@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 export default function SimpleMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  // console.log(props)
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -31,7 +32,7 @@ export default function SimpleMenu(props) {
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>Merge Sort</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>

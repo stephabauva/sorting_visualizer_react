@@ -23,18 +23,12 @@ function App(props) {
   ));
   return (
     <div className="App">
-      <div className="appName">
-        <h1>Sorting Visualizer</h1>
-      </div>
+      <div className="appName"><h1>Sorting Visualizer</h1></div>
         <div id="topbar">
-            <div id="slider-button-container">
-              <InputSlider />
-          </div>
-          {menuList}
-          <div id="visuzalier-container">
-            <SortingVisualizer />
-          </div>
+            <div id="slider-button-container"><InputSlider /></div>
+            <div id="menu-container">{menuList}</div>
         </div>
+        <div id="visualizer-container"><SortingVisualizer /></div>
     </div>
 
   );
