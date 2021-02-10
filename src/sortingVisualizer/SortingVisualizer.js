@@ -1,33 +1,18 @@
-import store from '../store';
-import React, { useState } from "react";
+import React from "react";
 import './SortingVisualizer.css';
 import { connect } from 'react-redux';
+import { doMergeSort } from '../sortingAlgorithms/SortingAlgorithms'
 
-{/****** SUBSCRIBE(listener) ******/}
-// subscribe(listener) -> Adds a change listener:
-// It will be called any time an action is dispatched, and some 
-// part of the state tree may potentially have changed.
-//Link: https://redux.js.org/api/store#subscribelistener
+/* ***** making this component check ig an element of the store has changed ******
+links:
+https://stackoverflow.com/questions/36557089/how-to-listen-for-specific-property-changes-in-redux-store-after-an-action-is-di
+https://stackoverflow.com/questions/36557089/how-to-listen-for-specific-property-changes-in-redux-store-after-an-action-is-di 
 
-// function select(state) {
-//     return state
-// }
+*********************************** */
 
-// function handleChange() {
-//     const currentValue = select(store.getState().listState);
-//     // console.log('handleChange:',currentValue)
-//     return SortingVisualizer(currentValue);
-//     }
-
-// const unsubscribe = store.subscribe(handleChange);
-// unsubscribe()
-
-{/************************************/}
-
-const mapStateToProps = (state) => {
-    // console.log('slider state:',state);
-    console.log('viz mapStateToProps:',state.listState);
-    return { listState: state.listState };
+const mapStateToProps = (state) => { // the store is accessible because we added Provider in index.js
+    console.log('SortingViz mapStateToProps:',state.listState);
+    return { myStoredList: state.listState };
     
   };
 
@@ -38,41 +23,43 @@ class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { array: [] };
-        console.log('thisarray:', this.array);
+        console.log('this.array:', this.state.array);
       }
+    /* compare previous list in store to the new actual list generated */
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.listState !== this.props.listState) {
+        // console.log('prevprops:', prevProps); // -> { myStoredList: Array(..), dispatch: f }
+        // console.log('this.props:', this.props);
+        if (prevProps.myStoredList !== this.props.myStoredList) {
             // Do whatever you want
-            console.log('prevProps.listState:',prevProps.listState);
-            console.log('this.props.listState:',this.props.listState);
-            this.setState({ array: this.props.listState });
+            // console.log('previous list:',prevProps.lmyStoredList);
+            // console.log('actual list:',this.props.myStoredList);
+            this.setState({ array: this.props.myStoredList });
             
         }
     }
+    /* ************************************************************ */
+
+    mergeSort() {
+        const animation = doMergeSort(this.state.array) 
+        console.log(animation);
+
+    }
     
     render() {
-        return <div>{this.state.array}hey</div> ;
-    } 
-    // const generatedList = unsubscribe
-    // had error: generatedList.map is not a function
-    // so I pushed all items of the object generatedList into a new empty list 
-   
-    // const array = [];
-   
-    // const resetArray = () => {
-    //     for (let i = 0; i < generatedList.length; i++) {
-    //         array.push(generatedList[i]);
-    // }}
-    // resetArray();
-    // console.log('array:',array);
-
-    // console.log('generatedList:',generatedList);
-    // console.log('is array:',Array.isArray(generatedList));
-    // {/****************************************** */}
-    // return (
-    // <div className="array-container">
-    //   </div>
-    // );
+        return <div className='array-container'>
+            {this.state.array.map((value, idx) => (
+                <div
+                className="array-bar"
+                key={idx}
+                style={{
+                    backgroundColor: PRIMARY_COLOR,
+                    height: `${value}px`,
+                }}></div>
+            ))}
+            <button onClick={() => this.mergeSort()}>Merge Sort</button>
+        </div> ;
+    }; 
 }
+
 
 export default connect(mapStateToProps)(SortingVisualizer);
