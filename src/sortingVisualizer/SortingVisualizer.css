@@ -4,6 +4,10 @@
     /* top: 100px; */
     border: 1px solid red; 
     height: fit-content;
+    white-space: nowrap;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 .array-bar {
@@ -13,5 +17,9 @@
 }
 
 .test {
-    border: 1px solid red; 
+    /* border: 1px solid red;  */
+}
+
+.buttons-container {
+  border: 1px solid green; 
 }

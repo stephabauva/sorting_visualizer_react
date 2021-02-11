@@ -17,7 +17,11 @@ const mapStateToProps = (state) => { // the store is accessible because we added
   };
 
 // This is the main color of the array bars.
-const PRIMARY_COLOR = 'turquoise';
+const INIT_COLOR = 'turquoise';
+const COMPARE_COLOR = 'red';
+const OVERWRITTE_COLOR = 'purple';
+const FINAL_SORTED_COLOR = '#7dff84';
+const ANIMATION_SPEED_MS = 10;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -38,12 +42,75 @@ class SortingVisualizer extends React.Component {
         }
     }
     /* ************************************************************ */
+//to execute function asynchronously (async + await + new Promise + setTimout), link: https://dev.to/jameseaster/visualizing-merge-sort-3mnc
+    async mergeSort() {
+        const animations = doMergeSort(this.state.array) 
+        let endViz = 0;
+        console.log(animations);
+        for (let i = 0; i < animations.length; i++) {
 
-    mergeSort() {
-        const animation = doMergeSort(this.state.array) 
-        console.log(animation);
+            const arrayBars = document.getElementsByClassName('array-bar'); // get the array generated
+            const isColorChange = i % 3 !== 2; //if remainder !== 2, then i is one of the two grad-and-color subarrays (not the overwritting one, the 3rd subarray)
+            if (isColorChange) { //if True
+                //then grab the 2 indices of the subarray
+                const [barOneIdx, barTwoIdx] = animations[i]; // [idx list1 of the item that was compared with, item at idx list2]
+                // get the style at these two indices
+                console.log(i, animations.length);
+                console.log('arrayBars[barOneIdx]:', arrayBars[barOneIdx]);
+                const barOneStyle = arrayBars[barOneIdx].style;
+                const barTwoStyle = arrayBars[barTwoIdx].style;
+                // if i is a multiple of 3, change the color (secondary), otherwise let its primary color
+                const color = i % 3 === 0 ? COMPARE_COLOR : INIT_COLOR;
+                // The conditional (ternary) operator '?' is the only JavaScript operator that takes three operands: 
+                // a condition followed by a question mark (?), then an expression to execute if the condition is 
+                // truthy followed by a colon (:), and finally the expression to execute if the condition is falsy. 
+                // This operator is frequently used as a shortcut for the if statement.
+                // link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator#:~:text=The%20conditional%20(ternary)%20operator%20is,if%20the%20condition%20is%20falsy.
 
+                //using a timeout, slowly change the colors of barOne and barTwo
+                // setTimeout( () => {
+                //     barOneStyle.backgroundColor = color;
+                //     barTwoStyle.backgroundColor = color;
+                // }, i * ANIMATION_SPEED_MS);
+                barOneStyle.backgroundColor = color;
+                barTwoStyle.backgroundColor = color;
+                endViz++;
+                await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+            } else {
+                //meaning if the remainder of i/3 === 2, then i is the subarray used for the overwritting 
+                const [barOneIdx, newHeight] = animations[i]; // -> [idx to be overwritten, overwritting value], 
+                // setTimeout( () => {
+                //     // then get the idx, get the value
+                    
+                //     // overwritte the old value
+                //     // arrayBars[barOneIdx].style.backgroundColor = OVERWRITTE_COLOR;
+                //     arrayBars[barOneIdx].style.height = `${newHeight}px`; 
+                // }, i * ANIMATION_SPEED_MS);
+                arrayBars[barOneIdx].style.backgroundColor = OVERWRITTE_COLOR;
+                arrayBars[barOneIdx].style.height = `${newHeight}px`; 
+                endViz++;
+                await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+            }
+        } 
+        console.log('endViz:', endViz, 'animations.length:', animations.length);
+        if (endViz === animations.length ) {
+            this.finalViz();
+        }
     }
+
+    //finally, color the sorted list in green
+  async finalViz() {
+        const arrayBars = document.getElementsByClassName('array-bar');
+            for (let f=0; f<arrayBars.length; f++) {
+                // setTimeout( () => {
+                //     const barStyle = arrayBars[f].style;
+                //     barStyle.backgroundColor = FINAL_SORTED_COLOR;
+                // }, f * ANIMATION_SPEED_MS * 2);
+                const barStyle = arrayBars[f].style;
+                barStyle.backgroundColor = FINAL_SORTED_COLOR;
+                await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+            } 
+   }; 
     
     render() {
         return <div className='array-container'>
@@ -52,11 +119,14 @@ class SortingVisualizer extends React.Component {
                 className="array-bar"
                 key={idx}
                 style={{
-                    backgroundColor: PRIMARY_COLOR,
+                    backgroundColor: INIT_COLOR,
                     height: `${value}px`,
+                    width: `${(2/3)*window.innerWidth/this.state.array.length}px`,
                 }}></div>
             ))}
-            <button onClick={() => this.mergeSort()}>Merge Sort</button>
+            <div className='buttons-container'>
+                <button onClick={() => this.mergeSort()}>Merge Sort</button>
+            </div>
         </div> ;
     }; 
 }
