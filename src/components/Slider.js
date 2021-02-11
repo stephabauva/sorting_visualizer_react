@@ -1,31 +1,77 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-import Input from '@material-ui/core/Input';
-
 import React from 'react';
-
 import store from '../store'
 
-const useStyles = makeStyles({
+
+import PropTypes from 'prop-types';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: 250,
+    width: 300 + theme.spacing(3) * 2,
   },
-  input: {
-    width: 42,
+  margin: {
+    height: theme.spacing(3),
   },
-});
+}));
+
+function ValueLabelComponent(props) {
+  const { children, open, value } = props;
+
+  return (
+    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
+      {children}
+    </Tooltip>
+  );
+}
+
+ValueLabelComponent.propTypes = {
+  children: PropTypes.element.isRequired,
+  open: PropTypes.bool.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+const PrettoSlider = withStyles({ //styled-component ?
+  root: {
+    color: '#52af77',
+    height: 8,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
+    marginTop: -8,
+    marginLeft: 0,
+    marginRight: 10,
+    '&:focus, &:hover, &$active': {
+      boxShadow: 'inherit',
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: 'calc(-50% + 4px)',
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  },
+})(Slider);
 
 export default function InputSlider(props) {
-  const classes = useStyles(); //material-ui
-
-  // create inital slider value (0) and a function to update it
+  const classes = useStyles();
+    // create inital slider value (0) and a function to update it
   const [sliderValue, setSliderValue] = React.useState(0);
 
   //handleSliderChange gets the value from the slider
   const handleSliderChange = (event, newValue) => {
-    console.log(newValue);
+    // console.log(newValue);
     if (newValue > 0) {
       setSliderValue(newValue); //updates the previous value of the slider
       // create a liste of random number with length of newValue
@@ -38,52 +84,16 @@ export default function InputSlider(props) {
     };
   };
 
-  const handleInputChange = (event, newValue) => {
-    setSliderValue(event.target.sliderValue === '' ? '' : Number(event.target.sliderValue));
-  };
-
-  const handleBlur = () => {
-    if (sliderValue < 0) {
-      setSliderValue(0);
-    } else if (sliderValue > 300) {
-      setSliderValue(300);
-    }
-  };
+  const handleSpeedChange = (event, newValue) => {};
 
   return (
-    <div className="slider-container">
-        <div className={classes.root}>
-        <Typography id="input-slider" gutterBottom>
-            Size of the list
-        </Typography>
-        <Grid container spacing={2} alignItems="center">
-            <Grid item xs>
-            <Slider
-                value={typeof sliderValue === 'number' ? sliderValue : 0}
-                onChange={handleSliderChange}
-                aria-labelledby="input-slider"
-            />
-            </Grid>
-            <Grid item>
-            <Input
-                className={classes.input}
-                value={sliderValue}
-                margin="dense"
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                inputProps={{
-                step: 1,
-                min: 10,
-                max: 300,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-                }}
-            />
-            </Grid>
-        </Grid>
-        </div>
+    <div className={classes.root}>
+      <div className={classes.margin} />
+      <Typography gutterBottom>Change the size of the chart</Typography>
+      <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={0} onChange={handleSliderChange}/>
+      <PrettoSlider valueLabelDisplay="auto"  defaultValue={10} onChange={handleSpeedChange}/>
+      <Typography gutterBottom>Change the sorting speed (ms)</Typography>
+      <div className={classes.margin} />
     </div>
-    
-    
   );
 }

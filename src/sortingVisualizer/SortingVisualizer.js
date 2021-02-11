@@ -11,7 +11,7 @@ https://stackoverflow.com/questions/36557089/how-to-listen-for-specific-property
 *********************************** */
 
 const mapStateToProps = (state) => { // the store is accessible because we added Provider in index.js
-    console.log('SortingViz mapStateToProps:',state.listState);
+    // console.log('SortingViz mapStateToProps:',state.listState);
     return { myStoredList: state.listState };
     
   };
@@ -19,7 +19,7 @@ const mapStateToProps = (state) => { // the store is accessible because we added
 // This is the main color of the array bars.
 const INIT_COLOR = 'turquoise';
 const COMPARE_COLOR = 'red';
-const OVERWRITTE_COLOR = 'purple';
+const OVERWRITTE_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
 const ANIMATION_SPEED_MS = 10;
 
@@ -27,7 +27,7 @@ class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { array: [] };
-        console.log('this.array:', this.state.array);
+        // console.log('this.array:', this.state.array);
       }
     /* compare previous list in store to the new actual list generated */
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -46,7 +46,6 @@ class SortingVisualizer extends React.Component {
     async mergeSort() {
         const animations = doMergeSort(this.state.array) 
         let endViz = 0;
-        console.log(animations);
         for (let i = 0; i < animations.length; i++) {
 
             const arrayBars = document.getElementsByClassName('array-bar'); // get the array generated
@@ -55,8 +54,6 @@ class SortingVisualizer extends React.Component {
                 //then grab the 2 indices of the subarray
                 const [barOneIdx, barTwoIdx] = animations[i]; // [idx list1 of the item that was compared with, item at idx list2]
                 // get the style at these two indices
-                console.log(i, animations.length);
-                console.log('arrayBars[barOneIdx]:', arrayBars[barOneIdx]);
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
                 // if i is a multiple of 3, change the color (secondary), otherwise let its primary color
@@ -92,13 +89,13 @@ class SortingVisualizer extends React.Component {
                 await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
             }
         } 
-        console.log('endViz:', endViz, 'animations.length:', animations.length);
+
         if (endViz === animations.length ) {
             this.finalViz();
         }
     }
 
-    //finally, color the sorted list in green
+//finally, color the sorted list in green
   async finalViz() {
         const arrayBars = document.getElementsByClassName('array-bar');
             for (let f=0; f<arrayBars.length; f++) {

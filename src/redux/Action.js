@@ -4,3 +4,10 @@ export const setRawList = (list) => {
         payload: list    
     }
 };
+
+export const setSortingSpeed = (number) => {
+    return {
+        type: 'SET_SPEED',
+        payload: number    
+    }
+};
