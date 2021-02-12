@@ -2,6 +2,7 @@ import React from "react";
 import './SortingVisualizer.css';
 import { connect } from 'react-redux';
 import { doMergeSort } from '../sortingAlgorithms/SortingAlgorithms'
+import { doQuickSort } from '../sortingAlgorithms/quickSort'
 
 /* ***** making this component check ig an element of the store has changed ******
 links:
@@ -20,6 +21,7 @@ const mapStateToProps = (state) => { // the store is accessible because we added
 const INIT_COLOR = 'turquoise';
 const COMPARE_COLOR = 'red';
 const OVERWRITTE_COLOR = '#8000ff';
+const SWAP_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
 const ANIMATION_SPEED_MS = 10;
 
@@ -95,6 +97,40 @@ class SortingVisualizer extends React.Component {
         }
     }
 
+    async quickSort() {
+        const animations = doQuickSort(this.state.array);
+        // console.log('sorted:',animations);
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar'); 
+            const [command, barOneIdx, barTwoIdx] = animations[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            console.log(command, barOneIdx, barTwoIdx);
+            switch(command) {
+                case 0:
+                  barOneStyle.backgroundColor = COMPARE_COLOR;
+                  barTwoStyle.backgroundColor = COMPARE_COLOR;
+                //   await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                //   break;
+                case 1:
+                    barOneStyle.backgroundColor = SWAP_COLOR;
+                    barTwoStyle.backgroundColor = SWAP_COLOR;
+                    const temp = barOneStyle.height;
+                    barOneStyle.height = barTwoStyle.height;
+                    barTwoStyle.height = temp;
+                    // await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                //   break;
+                case -1:
+                    barOneStyle.backgroundColor = SWAP_COLOR;
+                    barTwoStyle.backgroundColor = INIT_COLOR;
+                    // await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    // break
+                // default:
+                  // code block
+              }
+        }
+    }
+
 //finally, color the sorted list in green
   async finalViz() {
         const arrayBars = document.getElementsByClassName('array-bar');
@@ -123,6 +159,7 @@ class SortingVisualizer extends React.Component {
             ))}
             <div className='buttons-container'>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
+                <button onClick={() => this.quickSort()}>Quick Sort</button>
             </div>
         </div> ;
     }; 
