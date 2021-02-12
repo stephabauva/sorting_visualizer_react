@@ -86,6 +86,10 @@ export default function InputSlider(props) {
 
   const handleSpeedChange = (event, newValue) => {};
 
+  function reloadPage() {
+    window.location.reload();
+  }
+
   return (
     <div className={classes.root}>
       <div className={classes.margin} />
@@ -93,6 +97,7 @@ export default function InputSlider(props) {
       <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={0} onChange={handleSliderChange}/>
       <PrettoSlider valueLabelDisplay="auto"  defaultValue={10} onChange={handleSpeedChange}/>
       <Typography gutterBottom>Change the sorting speed (ms)</Typography>
+      <button onClick={() => reloadPage()}>Reset your list</button>
       <div className={classes.margin} />
     </div>
   );

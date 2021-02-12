@@ -23,7 +23,7 @@ const COMPARE_COLOR = 'red';
 const OVERWRITTE_COLOR = '#8000ff';
 const SWAP_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 10;
+const ANIMATION_SPEED_MS = 30;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -103,36 +103,45 @@ class SortingVisualizer extends React.Component {
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar'); 
             const [command, barOneIdx, barTwoIdx] = animations[i];
+            console.log(command, barOneIdx, barTwoIdx);
             const barOneStyle = arrayBars[barOneIdx].style;
             const barTwoStyle = arrayBars[barTwoIdx].style;
-            console.log(command, barOneIdx, barTwoIdx);
+            console.log('barOneSTyle:', barOneStyle, 'barTwoStyle:', barTwoStyle);
+            console.log(typeof command);
             switch(command) {
-                case 0:
+                case -1:
                   barOneStyle.backgroundColor = COMPARE_COLOR;
                   barTwoStyle.backgroundColor = COMPARE_COLOR;
+                  await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                 //   await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                 //   break;
-                case 1:
+                case -2:
                     barOneStyle.backgroundColor = SWAP_COLOR;
                     barTwoStyle.backgroundColor = SWAP_COLOR;
                     const temp = barOneStyle.height;
                     barOneStyle.height = barTwoStyle.height;
                     barTwoStyle.height = temp;
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                     // await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                 //   break;
-                case -1:
-                    barOneStyle.backgroundColor = SWAP_COLOR;
+                case -3:
+                    barOneStyle.backgroundColor = INIT_COLOR;
                     barTwoStyle.backgroundColor = INIT_COLOR;
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                     // await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                     // break
                 // default:
                   // code block
               }
+              if (i === animations.length-1 ) {
+                this.finalViz();
+            }
         }
     }
 
 //finally, color the sorted list in green
   async finalViz() {
+      console.log('in final viz');
         const arrayBars = document.getElementsByClassName('array-bar');
             for (let f=0; f<arrayBars.length; f++) {
                 // setTimeout( () => {
