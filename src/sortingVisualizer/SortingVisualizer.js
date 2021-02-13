@@ -23,7 +23,7 @@ const COMPARE_COLOR = 'red';
 const OVERWRITTE_COLOR = '#8000ff';
 const SWAP_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 30;
+const ANIMATION_SPEED_MS = 25;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
