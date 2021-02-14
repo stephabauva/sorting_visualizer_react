@@ -1,5 +1,6 @@
 import SimpleMenu from "./components/Menu"
 import InputSlider from "./components/Slider"
+import languages from "./components/languages"
 import SortingVisualizer from "./sortingVisualizer/SortingVisualizer"
 import './App.css';
 import React from "react";
@@ -28,6 +29,7 @@ function App(props) {
             <div id="slider-button-container"><InputSlider /></div>
             <div id="menu-container">{menuList}</div>
         </div>
+        <div id="languages-container"><languages /></div>
         <div id="visualizer-container"><SortingVisualizer /></div>
     </div>
 

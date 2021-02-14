@@ -1,13 +1,19 @@
+.visualizer-container {
+  width: 100px;
+}
+
 .array-container {
     /* position: absolute; */
     left: 100px;
     /* top: 100px; */
     border: 1px solid red; 
-    height: fit-content;
+    height: 500px; /*fit-content;*/
     white-space: nowrap;
     padding: 10px;
     margin-left: auto;
     margin-right: auto;
+    overflow: auto;
+
   }
 
 .array-bar {

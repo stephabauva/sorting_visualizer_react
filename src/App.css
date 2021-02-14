@@ -1,6 +1,10 @@
 .App {
   text-align: center;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
+}
+
+h1 {
+  margin: 0;
 }
 
 #topbar {
@@ -8,6 +12,10 @@
   overflow: auto;
   min-height: 20px;
 
+}
+
+#code-and-viz-container {
+  border: 1px solid blue; 
 }
 
 #slider-button-container {
@@ -39,4 +47,26 @@
   float:left;
 }
 
+#code-and-viz-container{
+  /* display: inline-block; */
+}
 
+#code-and-button-container{
+  border: 1px solid red;
+  width: 400px;
+  height: 500px;
+  float:left;
+}
+.code-container {
+  height: 500px;
+  width: 400px;
+  border: 1px solid green;
+}
+
+#languages-container{
+  height: 500px;
+  width: 400px;
+  border: 1px solid green;
+  float:left;
+  margin-bottom:  0px;
+}

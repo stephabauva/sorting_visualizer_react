@@ -23,7 +23,7 @@ const COMPARE_COLOR = 'red';
 const OVERWRITTE_COLOR = '#8000ff';
 const SWAP_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 25;
+const ANIMATION_SPEED_MS = 10;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -156,6 +156,10 @@ class SortingVisualizer extends React.Component {
     
     render() {
         return <div className='array-container'>
+            <div className='buttons-container'>
+                <button onClick={() => this.mergeSort()}>Merge Sort</button>
+                <button onClick={() => this.quickSort()}>Quick Sort</button>
+            </div>
             {this.state.array.map((value, idx) => (
                 <div
                 className="array-bar"
@@ -163,13 +167,9 @@ class SortingVisualizer extends React.Component {
                 style={{
                     backgroundColor: INIT_COLOR,
                     height: `${value}px`,
-                    width: `${(2/3)*window.innerWidth/this.state.array.length}px`,
+                    width: `${(1.50/3)*window.innerWidth/this.state.array.length}px`,
                 }}></div>
             ))}
-            <div className='buttons-container'>
-                <button onClick={() => this.mergeSort()}>Merge Sort</button>
-                <button onClick={() => this.quickSort()}>Quick Sort</button>
-            </div>
         </div> ;
     }; 
 }
