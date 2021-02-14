@@ -72,10 +72,12 @@ export default function InputSlider(props) {
   //handleSliderChange gets the value from the slider
   const handleSliderChange = (event, newValue) => {
     // console.log(newValue);
-    if (newValue > 0) {
-      setSliderValue(newValue); //updates the previous value of the slider
+    const lever = 1;
+    const pumpedValue = newValue * lever;
+    if (pumpedValue > 0) {
+      setSliderValue(pumpedValue); //updates the previous value of the slider
       // create a liste of random number with length of newValue
-      const newArray = [...Array(newValue)].map(_=>Math.ceil(Math.random()*400));
+      const newArray = [...Array(pumpedValue)].map(_=>Math.ceil(Math.random()*400));
       // dispatch the new list: update the store with our new list
       store.dispatch({
         type: 'SET_LIST',
