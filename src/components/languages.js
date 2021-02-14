@@ -1,4 +1,4 @@
-export default function languages() {
+export default function Languages() {
     return (
 <div id="code-and-viz-container">
     <div id="code-and-button-container">

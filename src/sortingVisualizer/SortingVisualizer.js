@@ -23,7 +23,7 @@ const COMPARE_COLOR = 'red';
 const OVERWRITTE_COLOR = '#8000ff';
 const SWAP_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 10;
+const ANIMATION_SPEED_MS = 30;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -99,9 +99,18 @@ class SortingVisualizer extends React.Component {
 
     async quickSort() {
         const animations = doQuickSort(this.state.array);
-        // console.log('sorted:',animations);
+        console.log(animations);
+        console.log('sorted:',animations);
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar'); 
+            if (animations[i].length === 2) {
+                const [command, pivotIdx] =  animations[i];
+                console.log('cmd pvtidx:', command, pivotIdx);
+                const barPivotStyle = arrayBars[pivotIdx].style;
+                barPivotStyle.backgroundColor = COMPARE_COLOR;
+                await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+            } else {
+            console.log('else:', i);
             const [command, barOneIdx, barTwoIdx] = animations[i];
             console.log(command, barOneIdx, barTwoIdx);
             const barOneStyle = arrayBars[barOneIdx].style;
@@ -109,30 +118,28 @@ class SortingVisualizer extends React.Component {
             console.log('barOneSTyle:', barOneStyle, 'barTwoStyle:', barTwoStyle);
             console.log(typeof command);
             switch(command) {
-                case -1:
-                  barOneStyle.backgroundColor = COMPARE_COLOR;
-                  barTwoStyle.backgroundColor = COMPARE_COLOR;
-                  await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
-                //   await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
-                //   break;
                 case -2:
                     barOneStyle.backgroundColor = SWAP_COLOR;
                     barTwoStyle.backgroundColor = SWAP_COLOR;
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                     const temp = barOneStyle.height;
                     barOneStyle.height = barTwoStyle.height;
                     barTwoStyle.height = temp;
                     await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                     // await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
-                //   break;
+                  break;
                 case -3:
                     barOneStyle.backgroundColor = INIT_COLOR;
                     barTwoStyle.backgroundColor = INIT_COLOR;
                     await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                     // await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
-                    // break
-                // default:
-                  // code block
+                    break
+                default:
+                    barOneStyle.backgroundColor = INIT_COLOR;
+                    barTwoStyle.backgroundColor = INIT_COLOR;
               }
+            }
+            
               if (i === animations.length-1 ) {
                 this.finalViz();
             }

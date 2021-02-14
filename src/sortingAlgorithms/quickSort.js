@@ -11,6 +11,7 @@ export function doQuickSort(array) {;
     console.log('quick array:', array);
     const start = 0;
     const end = array.length-1;
+    animations.push([-1, end]);
     quickSort(array, start, end, animations);
     console.log('sorted:', array);
     return animations;
@@ -29,6 +30,7 @@ function quickSort(arr, start, end, animations) {
 function partition(arr, start , end, animations) {
     let pivotIndex = start;
     let pivotValue = arr[end];
+    animations.push([-1, end]);
     for (let i = start; i < end; i++) {
         if (arr[i] < pivotValue) {
             swap(arr, i, pivotIndex, animations);
