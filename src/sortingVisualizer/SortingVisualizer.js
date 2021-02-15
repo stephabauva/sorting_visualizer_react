@@ -194,14 +194,46 @@ class SortingVisualizer extends React.Component {
 
     async insertionSort() {
         const animations = doInsertionSort(this.state.array);
-        console.log(animations);
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar'); 
-            // console.log('length:', animations[i].length);
+            switch(animations[i][0]) {
+                case 0:
+                    const keyIdxInit = animations[i][1];
+                    const barOneStyleInit = arrayBars[keyIdxInit].style;
+                    barOneStyleInit.backgroundColor= INIT_COLOR; 
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
+                case 1:
+                    const keyIdxOne = animations[i][1];
+                    const barOneStyleOne = arrayBars[keyIdxOne].style;
+                    barOneStyleOne.backgroundColor= RED_COLOR; 
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
+                case 2:
+                    const barIdxTwo = animations[i][1];
+                    const barOneStyleTwo = arrayBars[barIdxTwo].style;
+                    barOneStyleTwo.backgroundColor= SELECT_COLOR; 
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
+                case 3:
+                    const barIdxThree = animations[i][1];
+                    const barOneStyleThree = arrayBars[barIdxThree].style;
+                    barOneStyleThree.backgroundColor= OVERWRITTE_COLOR; 
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                case 4:
+                    const [command, barOneIdx, key] = animations[i];
+                    const barOneStyle4 = arrayBars[barOneIdx].style;
+                    barOneStyle4.height = `${key}px`;
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
+                } 
+                if (i === animations.length-1 ) {
+                    this.finalViz();
+                }   
+            }
+          
         }
-    }
     
-
 //finally, color the sorted list in green
   async finalViz() {
       console.log('in final viz');
