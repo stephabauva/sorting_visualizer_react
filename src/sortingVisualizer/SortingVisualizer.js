@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { doMergeSort } from '../sortingAlgorithms/SortingAlgorithms'
 import { doQuickSort } from '../sortingAlgorithms/QuickSort'
 import { doBubbleSort } from '../sortingAlgorithms/BubbleSort'
+import { doInsertionSort } from '../sortingAlgorithms/InsertionSort'
 
 /* ***** making this component check ig an element of the store has changed ******
 links:
@@ -21,10 +22,11 @@ const mapStateToProps = (state) => { // the store is accessible because we added
 // This is the main color of the array bars.
 const INIT_COLOR = 'turquoise';
 const RED_COLOR = 'red';
-const OVERWRITTE_COLOR = '#8000ff';
-const SWAP_COLOR = '#8000ff';
+const SELECT_COLOR = '#8000ff';
+var SWAP_COLOR, OVERWRITTE_COLOR;
+SWAP_COLOR = OVERWRITTE_COLOR = '#f5bf42';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 50;
+const ANIMATION_SPEED_MS = 10;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -155,7 +157,7 @@ class SortingVisualizer extends React.Component {
             const arrayBars = document.getElementsByClassName('array-bar'); 
             const [command, barOneIdx, barTwoIdx] = animations[i];
             console.log('barTwoIdx:', barTwoIdx, 'arrayBars.length', arrayBars.length);
-            if (barTwoIdx == arrayBars.length) {
+            if (barTwoIdx === arrayBars.length) {
                 continue;
             }
             console.log(i, command, barOneIdx, barTwoIdx);
@@ -190,6 +192,16 @@ class SortingVisualizer extends React.Component {
         };
     }
 
+    async insertionSort() {
+        const animations = doInsertionSort(this.state.array);
+        console.log(animations);
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar'); 
+            // console.log('length:', animations[i].length);
+        }
+    }
+    
+
 //finally, color the sorted list in green
   async finalViz() {
       console.log('in final viz');
@@ -211,6 +223,7 @@ class SortingVisualizer extends React.Component {
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
                 <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                <button onClick={() => this.insertionSort()}>Insertion Sort</button>
             </div>
             {this.state.array.map((value, idx) => (
                 <div
