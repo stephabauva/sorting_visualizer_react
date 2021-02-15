@@ -2,7 +2,8 @@ import React from "react";
 import './SortingVisualizer.css';
 import { connect } from 'react-redux';
 import { doMergeSort } from '../sortingAlgorithms/SortingAlgorithms'
-import { doQuickSort } from '../sortingAlgorithms/quickSort'
+import { doQuickSort } from '../sortingAlgorithms/QuickSort'
+import { doBubbleSort } from '../sortingAlgorithms/BubbleSort'
 
 /* ***** making this component check ig an element of the store has changed ******
 links:
@@ -19,11 +20,11 @@ const mapStateToProps = (state) => { // the store is accessible because we added
 
 // This is the main color of the array bars.
 const INIT_COLOR = 'turquoise';
-const COMPARE_COLOR = 'red';
+const RED_COLOR = 'red';
 const OVERWRITTE_COLOR = '#8000ff';
 const SWAP_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 30;
+const ANIMATION_SPEED_MS = 50;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -59,7 +60,7 @@ class SortingVisualizer extends React.Component {
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
                 // if i is a multiple of 3, change the color (secondary), otherwise let its primary color
-                const color = i % 3 === 0 ? COMPARE_COLOR : INIT_COLOR;
+                const color = i % 3 === 0 ? RED_COLOR : INIT_COLOR;
                 // The conditional (ternary) operator '?' is the only JavaScript operator that takes three operands: 
                 // a condition followed by a question mark (?), then an expression to execute if the condition is 
                 // truthy followed by a colon (:), and finally the expression to execute if the condition is falsy. 
@@ -107,7 +108,7 @@ class SortingVisualizer extends React.Component {
                 const [command, pivotIdx] =  animations[i];
                 console.log('cmd pvtidx:', command, pivotIdx);
                 const barPivotStyle = arrayBars[pivotIdx].style;
-                barPivotStyle.backgroundColor = COMPARE_COLOR;
+                barPivotStyle.backgroundColor = RED_COLOR;
                 await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
             } else {
             console.log('else:', i);
@@ -146,6 +147,49 @@ class SortingVisualizer extends React.Component {
         }
     }
 
+    async bubbleSort() {
+        console.log(this.state.array);
+        const animations = doBubbleSort(this.state.array);
+        console.log(animations);
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar'); 
+            const [command, barOneIdx, barTwoIdx] = animations[i];
+            console.log('barTwoIdx:', barTwoIdx, 'arrayBars.length', arrayBars.length);
+            if (barTwoIdx == arrayBars.length) {
+                continue;
+            }
+            console.log(i, command, barOneIdx, barTwoIdx);
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            switch(command) {
+                case 0: 
+                    barOneStyle.backgroundColor = INIT_COLOR;
+                    barTwoStyle.backgroundColor = INIT_COLOR;
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
+                case 1:
+                    barOneStyle.backgroundColor = RED_COLOR;
+                    barTwoStyle.backgroundColor = RED_COLOR;
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
+                case 2:
+                    arrayBars[barOneIdx].style.backgroundColor = OVERWRITTE_COLOR;
+                    arrayBars[barTwoIdx].style.backgroundColor = OVERWRITTE_COLOR;
+                    const temp = barOneStyle.height;
+                    barOneStyle.height = barTwoStyle.height;
+                    barTwoStyle.height = temp;
+                    await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
+                default:
+                    barOneStyle.backgroundColor = INIT_COLOR;
+                    barTwoStyle.backgroundColor = INIT_COLOR;
+            };
+            if (i === animations.length-1 ) {
+                this.finalViz();
+            }
+        };
+    }
+
 //finally, color the sorted list in green
   async finalViz() {
       console.log('in final viz');
@@ -166,6 +210,7 @@ class SortingVisualizer extends React.Component {
             <div className='buttons-container'>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
+                <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
             </div>
             {this.state.array.map((value, idx) => (
                 <div
