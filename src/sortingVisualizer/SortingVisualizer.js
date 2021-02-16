@@ -22,11 +22,11 @@ const mapStateToProps = (state) => { // the store is accessible because we added
 // This is the main color of the array bars.
 const INIT_COLOR = 'turquoise';
 const RED_COLOR = 'red';
-const SELECT_COLOR = '#8000ff';
+const SELECT_COLOR = '#f5bf42';
 var SWAP_COLOR, OVERWRITTE_COLOR;
-SWAP_COLOR = OVERWRITTE_COLOR = '#f5bf42';
+SWAP_COLOR = OVERWRITTE_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 10;
+const ANIMATION_SPEED_MS = 50;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -90,8 +90,10 @@ class SortingVisualizer extends React.Component {
                 // }, i * ANIMATION_SPEED_MS);
                 arrayBars[barOneIdx].style.backgroundColor = OVERWRITTE_COLOR;
                 arrayBars[barOneIdx].style.height = `${newHeight}px`; 
-                endViz++;
                 await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                arrayBars[barOneIdx].style.backgroundColor = INIT_COLOR;
+                await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                endViz++;
             }
         } 
 
