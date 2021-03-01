@@ -26,7 +26,7 @@ const SELECT_COLOR = '#f5bf42';
 var SWAP_COLOR, OVERWRITTE_COLOR;
 SWAP_COLOR = OVERWRITTE_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 45;
+const ANIMATION_SPEED_MS = 55;
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
