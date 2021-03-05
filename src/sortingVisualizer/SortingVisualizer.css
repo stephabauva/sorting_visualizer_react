@@ -7,12 +7,13 @@
     left: 100px;
     /* top: 100px; */
     /* border: 1px solid red;  */
-    height: 500px; /*fit-content;*/
+    min-height: 500px; /*fit-content;*/
     white-space: nowrap;
     padding: 10px;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
+    border: 1px solid green; 
 
   }
 
@@ -20,7 +21,7 @@
   width: 2px;
   display: inline-block;
   margin: 0 1px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .buttons-container {

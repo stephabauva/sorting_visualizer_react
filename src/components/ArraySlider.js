@@ -11,6 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300 + theme.spacing(3) * 2,
+    padding: 7,
   },
   margin: {
     height: theme.spacing(1),
@@ -86,18 +87,11 @@ export default function InputArraySlider(props) {
     };
   };
 
-  const handleSpeedChange = (event, newValue) => {};
-
-  function reloadPage() {
-    window.location.reload();
-  }
-
   return (
     <div className={classes.root}>
       <div className={classes.margin} />
       <Typography gutterBottom>Change the size of the chart</Typography>
-      <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={0} onChange={handleSliderChange}/>
-      <button onClick={() => reloadPage()}>Reset your list</button>
+      <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={1} onChange={handleSliderChange}/>
     </div>
   );
 }

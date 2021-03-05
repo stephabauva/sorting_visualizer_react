@@ -11,6 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300 + theme.spacing(3) * 2,
+    padding: 5,
   },
   margin: {
     height: theme.spacing(1),
@@ -88,9 +89,8 @@ export default function InputSpeedSlider(props) {
   return (
     <div className={classes.root}>
       <div className={classes.margin} />
-      <Typography gutterBottom>Slow the sorting speed down (max=0.5s)</Typography>
+      <Typography gutterBottom>Slow the sorting speed down (ms)</Typography>
       <PrettoSlider valueLabelDisplay="auto"  defaultValue={INITIAL_SPEED} onChange={handleSpeedChange}/>
-      <div className={classes.margin} />
     </div>
   );
 }

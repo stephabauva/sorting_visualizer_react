@@ -1,5 +1,5 @@
 const speedInit = {
-    niceSpeed: 30,
+    niceSpeed: 35,
   }
 
 const sortSpeedReducer = (state = speedInit, action) => {

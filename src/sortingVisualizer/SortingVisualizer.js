@@ -44,9 +44,6 @@ class SortingVisualizer extends React.Component {
         // console.log('this.array:', this.state.array);
       }
     /* compare previous list in store to the new actual list generated */
-    checkStore(){
-        console.log('viz', store.getState())
-    }
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('prevprops:', prevProps); // -> { myStoredList: Array(..), dispatch: f }
         // console.log('this.props:', this.props);
@@ -271,6 +268,16 @@ class SortingVisualizer extends React.Component {
                 barStyle.backgroundColor = FINAL_SORTED_COLOR;
                 await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
             } 
+            await new Promise((resolve) => setTimeout(resolve, 800));
+            for (let f = arrayBars.length-1; f >= 0; f--) {
+                // setTimeout( () => {
+                //     const barStyle = arrayBars[f].style;
+                //     barStyle.backgroundColor = FINAL_SORTED_COLOR;
+                // }, f * ANIMATION_SPEED_MS * 2);
+                const barStyle = arrayBars[f].style;
+                barStyle.backgroundColor = INIT_COLOR;
+                await new Promise((resolve) => setTimeout(resolve, 20));
+            } 
    }; 
     
     render() {
@@ -280,7 +287,6 @@ class SortingVisualizer extends React.Component {
                 <button className="sort-button" style={{backgroundColor:"#ffdf87"}} onClick={() => this.quickSort()}>Quick Sort</button>
                 <button className="sort-button" style={{backgroundColor:"#87fff9"}}onClick={() => this.bubbleSort()}>Bubble Sort</button>
                 <button className="sort-button" style={{backgroundColor:"#ff8787"}}onClick={() => this.insertionSort()}>Insertion Sort</button>
-                <button onClick={() => this.checkStore()}>check store</button>
             </div>
             {this.state.array.map((value, idx) => (
                 <div
@@ -289,7 +295,7 @@ class SortingVisualizer extends React.Component {
                 style={{
                     backgroundColor: INIT_COLOR,
                     height: `${value}px`,
-                    width: `${(1.50/3)*window.innerWidth/this.state.array.length}px`,
+                    width: `${(1.5/2)*window.innerWidth/this.state.array.length}px`,
                 }}></div>
             ))}
         </div> ;
