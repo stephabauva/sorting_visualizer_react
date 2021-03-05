@@ -5,6 +5,7 @@ import { doMergeSort } from '../sortingAlgorithms/MergeSort'
 import { doQuickSort } from '../sortingAlgorithms/QuickSort'
 import { doBubbleSort } from '../sortingAlgorithms/BubbleSort'
 import { doInsertionSort } from '../sortingAlgorithms/InsertionSort'
+import store from '../store'
 
 /* ***** making this component check ig an element of the store has changed ******
 links:
@@ -13,9 +14,13 @@ https://stackoverflow.com/questions/36557089/how-to-listen-for-specific-property
 
 *********************************** */
 
-const mapStateToProps = (state) => { // the store is accessible because we added Provider in index.js
+const mapStateToProps = (...args) => { // the store is accessible because we added Provider in index.js
     // console.log('SortingViz mapStateToProps:',state.listState);
-    return { myStoredList: state.listState };
+    console.log('...args', args)
+    console.log('args[0]', args[0])
+    console.log("args[0]['listReducer']['listState']", args[0]['listReducer']['listState'])
+    console.log("args[0]['sortSpeedReducer']['sortSpeed']", args[0]['sortSpeedReducer']['sortSpeed'])
+    return { myStoredList: args[0]['listReducer']['listState'], myStoredSpeed: args[0]['sortSpeedReducer']['sortSpeed'] };
     
   };
 
@@ -31,19 +36,24 @@ const ANIMATION_SPEED_MS = 55;
 class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { array: [] };
+        this.state = { array: [], speed: 45};
         // console.log('this.array:', this.state.array);
       }
     /* compare previous list in store to the new actual list generated */
+    checkStore(){
+        console.log('viz', store.getState())
+    }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('prevprops:', prevProps); // -> { myStoredList: Array(..), dispatch: f }
+        console.log('prevprops:', prevProps); // -> { myStoredList: Array(..), dispatch: f }
         // console.log('this.props:', this.props);
         if (prevProps.myStoredList !== this.props.myStoredList) {
             // Do whatever you want
             // console.log('previous list:',prevProps.lmyStoredList);
             // console.log('actual list:',this.props.myStoredList);
             this.setState({ array: this.props.myStoredList });
-            
+        }
+        if (prevProps.myStoredSpeed !== this.props.myStoredSpeed) {
+            this.setState({speed: this.props.myStoredSpeed })
         }
     }
     /* ************************************************************ */
@@ -258,6 +268,7 @@ class SortingVisualizer extends React.Component {
                 <button className="sort-button" style={{backgroundColor:"#ffdf87"}} onClick={() => this.quickSort()}>Quick Sort</button>
                 <button className="sort-button" style={{backgroundColor:"#87fff9"}}onClick={() => this.bubbleSort()}>Bubble Sort</button>
                 <button className="sort-button" style={{backgroundColor:"#ff8787"}}onClick={() => this.insertionSort()}>Insertion Sort</button>
+                <button onClick={() => this.checkStore()}>check store</button>
             </div>
             {this.state.array.map((value, idx) => (
                 <div

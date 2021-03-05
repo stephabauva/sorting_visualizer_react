@@ -9,7 +9,7 @@ const customMiddleWare = store => next => action => {
     next(action);
   }
 const rootReducer = combineReducers({listReducer, sortSpeedReducer})
-const store = createStore(listReducer, applyMiddleware(customMiddleWare));
-// const store = createStore(rootReducer, applyMiddleware(customMiddleWare));
+// const store = createStore(listReducer, applyMiddleware(customMiddleWare));
+const store = createStore(rootReducer, applyMiddleware(customMiddleWare));
 
 export default (customMiddleWare, store);

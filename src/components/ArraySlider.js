@@ -1,7 +1,7 @@
 import React from 'react';
 import store from '../store'
 
-
+//############ START SLIDER & RESET BTN DESIGN  ########
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
@@ -63,7 +63,7 @@ const PrettoSlider = withStyles({ //styled-component ?
     borderRadius: 4,
   },
 })(Slider);
-
+//############ END SLIDER & RESET BTN DESIGN  ########
 export default function InputArraySlider(props) {
   const classes = useStyles();
     // create inital slider value (0) and a function to update it

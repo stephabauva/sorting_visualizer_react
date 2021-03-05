@@ -70,33 +70,25 @@ export default function InputSpeedSlider(props) {
   const [sliderValue, setSliderValue] = React.useState(0);
 
   //handleSliderChange gets the value from the slider
-  const handleSliderChange = (event, newValue) => {
+  const handleSpeedChange = (event, newValue) => {
     // console.log(newValue);
     const lever = 1;
-    const pumpedValue = newValue * lever;
-    if (pumpedValue > 0) {
-      setSliderValue(pumpedValue); //updates the previous value of the slider
-      // create a liste of random number with length of newValue
-      const newArray = [...Array(pumpedValue)].map(_=>Math.ceil(Math.random()*400));
+    const newSpeed = newValue * lever;
+    if (newSpeed > 0) {
+      setSliderValue(newSpeed); //updates the previous value of the slider
       // dispatch the new list: update the store with our new list
       store.dispatch({
-        type: 'SET_LIST',
-        payload: newArray
+        type: 'SET_SORT_SPEED',
+        payload: newSpeed
       })
     };
   };
-
-  const handleSpeedChange = (event, newValue) => {};
-
-  function reloadPage() {
-    window.location.reload();
-  }
 
   return (
     <div className={classes.root}>
       <div className={classes.margin} />
       <Typography gutterBottom>Change the sorting speed (ms)</Typography>
-      <PrettoSlider valueLabelDisplay="auto"  defaultValue={25} onChange={handleSpeedChange}/>
+      <PrettoSlider valueLabelDisplay="auto"  defaultValue={45} onChange={handleSpeedChange}/>
       <div className={classes.margin} />
     </div>
   );
