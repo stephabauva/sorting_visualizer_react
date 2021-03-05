@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     width: 300 + theme.spacing(3) * 2,
   },
   margin: {
-    height: theme.spacing(3),
+    height: theme.spacing(1),
   },
 }));
 
@@ -64,7 +64,7 @@ const PrettoSlider = withStyles({ //styled-component ?
   },
 })(Slider);
 
-export default function InputSlider(props) {
+export default function InputSpeedSlider(props) {
   const classes = useStyles();
     // create inital slider value (0) and a function to update it
   const [sliderValue, setSliderValue] = React.useState(0);
@@ -95,11 +95,8 @@ export default function InputSlider(props) {
   return (
     <div className={classes.root}>
       <div className={classes.margin} />
-      <Typography gutterBottom>Change the size of the chart</Typography>
-      <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={0} onChange={handleSliderChange}/>
-      <PrettoSlider valueLabelDisplay="auto"  defaultValue={10} onChange={handleSpeedChange}/>
       <Typography gutterBottom>Change the sorting speed (ms)</Typography>
-      <button onClick={() => reloadPage()}>Reset your list</button>
+      <PrettoSlider valueLabelDisplay="auto"  defaultValue={25} onChange={handleSpeedChange}/>
       <div className={classes.margin} />
     </div>
   );

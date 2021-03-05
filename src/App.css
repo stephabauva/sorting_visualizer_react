@@ -23,6 +23,7 @@ h1 {
   float: left;
   overflow: auto;
   padding: 30px;
+  /* height: 100px; */
 }
 
 .slider-container {
