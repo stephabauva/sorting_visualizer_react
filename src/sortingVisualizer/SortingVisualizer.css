@@ -6,7 +6,7 @@
     /* position: absolute; */
     left: 100px;
     /* top: 100px; */
-    border: 1px solid red; 
+    /* border: 1px solid red;  */
     height: 500px; /*fit-content;*/
     white-space: nowrap;
     padding: 10px;
@@ -20,12 +20,14 @@
   width: 2px;
   display: inline-block;
   margin: 0 1px;
-}
-
-.test {
-    /* border: 1px solid red;  */
+  margin-top: 10px;
 }
 
 .buttons-container {
-  border: 1px solid green; 
+  /* border: 1px solid green;  */
+}
+
+.sort-button {
+  font-size: 16px;
+  margin: 0 20px 10px 20px;
 }

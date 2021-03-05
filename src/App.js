@@ -1,7 +1,7 @@
 import SimpleMenu from "./components/Menu"
 import InputArraySlider from "./components/ArraySlider"
 import InputSpeedSlider from "./components/SpeedSlider"
-// import ResetButton from "./components/ResetButton"
+import Explanations from "./components/Explanations"
 // import Languages from "./components/displayRawCode" #for future implementation
 import SortingVisualizer from "./sortingVisualizer/SortingVisualizer"
 import './App.css';
@@ -29,8 +29,8 @@ function App(props) {
       <div className="appName"><h1>Sorting Visualizer</h1></div>
         <div id="topbar">
             <div id="slider-button-container"><InputArraySlider /></div>
-            {/* <div id="slider-button-container"><ResetButton /></div> */}
             <div id="slider-button-container"><InputSpeedSlider /></div>
+            <div id="explanations-block"><Explanations /></div>
             {/* <div id="menu-container">{menuList}</div> */}
         </div>
         {/* <div id="languages-container"><Languages /></div> #for future implementation */}

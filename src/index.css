@@ -12,3 +12,11 @@ code {
     monospace;
 }
 
+p {
+  text-align: left;
+  line-height: 0.7;
+}
+
+button {
+  margin: 0px, 5px, 0px, 5px;
+}

@@ -254,10 +254,10 @@ class SortingVisualizer extends React.Component {
     render() {
         return <div className='array-container'>
             <div className='buttons-container'>
-                <button onClick={() => this.mergeSort()}>Merge Sort</button>
-                <button onClick={() => this.quickSort()}>Quick Sort</button>
-                <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-                <button onClick={() => this.insertionSort()}>Insertion Sort</button>
+                <button className="sort-button" style={{backgroundColor:"#b5ff87"}} onClick={() => this.mergeSort()}>Merge Sort</button>
+                <button className="sort-button" style={{backgroundColor:"#ffdf87"}} onClick={() => this.quickSort()}>Quick Sort</button>
+                <button className="sort-button" style={{backgroundColor:"#87fff9"}}onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                <button className="sort-button" style={{backgroundColor:"#ff8787"}}onClick={() => this.insertionSort()}>Insertion Sort</button>
             </div>
             {this.state.array.map((value, idx) => (
                 <div
