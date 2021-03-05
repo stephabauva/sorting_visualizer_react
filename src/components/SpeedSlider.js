@@ -65,16 +65,17 @@ const PrettoSlider = withStyles({ //styled-component ?
 })(Slider);
 
 export default function InputSpeedSlider(props) {
+  const INITIAL_SPEED = store.getState()['sortSpeedReducer']['niceSpeed']
   const classes = useStyles();
     // create inital slider value (0) and a function to update it
   const [sliderValue, setSliderValue] = React.useState(0);
 
-  //handleSliderChange gets the value from the slider
+  //handleSpeedChange gets the value from the slider
   const handleSpeedChange = (event, newValue) => {
     // console.log(newValue);
     const lever = 1;
     const newSpeed = newValue * lever;
-    if (newSpeed > 0) {
+    if (newSpeed >= 0) {
       setSliderValue(newSpeed); //updates the previous value of the slider
       // dispatch the new list: update the store with our new list
       store.dispatch({
@@ -87,8 +88,8 @@ export default function InputSpeedSlider(props) {
   return (
     <div className={classes.root}>
       <div className={classes.margin} />
-      <Typography gutterBottom>Change the sorting speed (ms)</Typography>
-      <PrettoSlider valueLabelDisplay="auto"  defaultValue={45} onChange={handleSpeedChange}/>
+      <Typography gutterBottom>Slow the sorting speed down (max=0.5s)</Typography>
+      <PrettoSlider valueLabelDisplay="auto"  defaultValue={INITIAL_SPEED} onChange={handleSpeedChange}/>
       <div className={classes.margin} />
     </div>
   );

@@ -20,7 +20,11 @@ const mapStateToProps = (...args) => { // the store is accessible because we add
     console.log('args[0]', args[0])
     console.log("args[0]['listReducer']['listState']", args[0]['listReducer']['listState'])
     console.log("args[0]['sortSpeedReducer']['sortSpeed']", args[0]['sortSpeedReducer']['sortSpeed'])
-    return { myStoredList: args[0]['listReducer']['listState'], myStoredSpeed: args[0]['sortSpeedReducer']['sortSpeed'] };
+    return { 
+        myStoredList: args[0]['listReducer']['listState'], 
+        initialSortingSpeed: args[0]['sortSpeedReducer']['niceSpeed'],
+        myStoredSpeed: args[0]['sortSpeedReducer']['sortSpeed'] 
+    };
     
   };
 
@@ -31,12 +35,12 @@ const SELECT_COLOR = '#f5bf42';
 var SWAP_COLOR, OVERWRITTE_COLOR;
 SWAP_COLOR = OVERWRITTE_COLOR = '#8000ff';
 const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 55;
+let ANIMATION_SPEED_MS = "";
 
 class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { array: [], speed: 45};
+        this.state = { array: [], speed: ''};
         // console.log('this.array:', this.state.array);
       }
     /* compare previous list in store to the new actual list generated */
@@ -52,8 +56,16 @@ class SortingVisualizer extends React.Component {
             // console.log('actual list:',this.props.myStoredList);
             this.setState({ array: this.props.myStoredList });
         }
+        // console.log('ANIMATION_SPEED_MS BEFORE', ANIMATION_SPEED_MS)
+        //if the speed slider was not moved (myStoredSpeed is undefined), just use the default value (35 in SpeedReducer.js)
+        if (! ANIMATION_SPEED_MS) {
+            ANIMATION_SPEED_MS = prevProps.initialSortingSpeed ;
+            console.log('ANIMATION_SPEED_MS initial', ANIMATION_SPEED_MS)
+        }    
+        //if the slider was moved then use the current new speed slider value
         if (prevProps.myStoredSpeed !== this.props.myStoredSpeed) {
-            this.setState({speed: this.props.myStoredSpeed })
+            ANIMATION_SPEED_MS = this.props.myStoredSpeed 
+            console.log('ANIMATION_SPEED_MS AFTER', ANIMATION_SPEED_MS)
         }
     }
     /* ************************************************************ */
@@ -246,7 +258,7 @@ class SortingVisualizer extends React.Component {
           
         }
     
-//finally, color the sorted list in green
+    //finally, color the sorted list in green
   async finalViz() {
       console.log('in final viz');
         const arrayBars = document.getElementsByClassName('array-bar');
