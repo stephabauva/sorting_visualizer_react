@@ -1,3 +1,5 @@
+import Particles from 'react-particles-js';
+import particlesConfig from '../config/particlesConfig';
 import React from "react";
 import './SortingVisualizer.css';
 import { connect } from 'react-redux';
@@ -278,7 +280,7 @@ class SortingVisualizer extends React.Component {
                 await new Promise((resolve) => setTimeout(resolve, 20));
             } 
    }; 
-    
+  
     render() {
         return <div className='array-container'>
             <div className='buttons-container'>
@@ -286,6 +288,9 @@ class SortingVisualizer extends React.Component {
                 <button className="sort-button" style={{backgroundColor:"#ffdf87"}} onClick={() => this.quickSort()}>Quick Sort</button>
                 <button className="sort-button" style={{backgroundColor:"#87fff9"}}onClick={() => this.bubbleSort()}>Bubble Sort</button>
                 <button className="sort-button" style={{backgroundColor:"#ff8787"}}onClick={() => this.insertionSort()}>Insertion Sort</button>
+            </div>
+            <div style={{position: 'absolute'}}>
+                <Particles height="65vh" width="100vw" params={particlesConfig} />
             </div>
             {this.state.array.map((value, idx) => (
                 <div

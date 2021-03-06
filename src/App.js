@@ -1,5 +1,4 @@
-import Particles from 'react-particles-js';
-import particlesConfig from './config/particlesConfig';
+
 // import SimpleMenu from "./components/Menu"
 import InputArraySlider from "./components/ArraySlider"
 import InputSpeedSlider from "./components/SpeedSlider"
@@ -8,6 +7,7 @@ import Explanations from "./components/Explanations"
 import SortingVisualizer from "./sortingVisualizer/SortingVisualizer"
 import './App.css';
 import React from "react";
+import {Helmet} from 'react-helmet';
 
 function App(props) {
   // const [size, setSize] = useState([]);
@@ -27,10 +27,10 @@ function App(props) {
   //   />
   // ));
   return (
-    <div className="App" style={{backgroundcolor: 'turquoise', position: 'relative', overflow: "hidden" }}>
-      {/* <div style={{ position: 'absolute'}}>
-        <Particles height="100vh" width="100vw" params={particlesConfig} />
-      </div> */}
+    <div className="App">
+      <Helmet>
+        <style>{'body { background-color: white; }'}</style>
+      </Helmet>
       <div className="appName"><h1>Sorting Visualizer</h1></div>
         <div id="topbar">
             <div id="slider-button-container"><InputArraySlider /></div>

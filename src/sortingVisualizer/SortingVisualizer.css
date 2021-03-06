@@ -7,13 +7,13 @@
     left: 100px;
     /* top: 100px; */
     /* border: 1px solid red;  */
-    min-height: 450px; /*fit-content;*/
+    /* min-height: fit-content; */
     white-space: nowrap;
     padding: 10px;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
-    border: 1px solid green; 
+    /* border: 1px solid green;  */
 
   }
 
