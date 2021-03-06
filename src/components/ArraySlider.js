@@ -91,7 +91,7 @@ export default function InputArraySlider(props) {
     <div className={classes.root}>
       <div className={classes.margin} />
       <Typography gutterBottom>Change the size of the chart</Typography>
-      <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={1} onChange={handleSliderChange}/>
+      <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={1} min={1} max={300} onChange={handleSliderChange}/>
     </div>
   );
 }

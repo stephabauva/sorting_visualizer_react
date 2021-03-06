@@ -90,7 +90,7 @@ export default function InputSpeedSlider(props) {
     <div className={classes.root}>
       <div className={classes.margin} />
       <Typography gutterBottom>Slow the sorting speed down (ms)</Typography>
-      <PrettoSlider valueLabelDisplay="auto"  defaultValue={INITIAL_SPEED} onChange={handleSpeedChange}/>
+      <PrettoSlider valueLabelDisplay="auto"  defaultValue={INITIAL_SPEED} max={1000} onChange={handleSpeedChange}/>
     </div>
   );
 }

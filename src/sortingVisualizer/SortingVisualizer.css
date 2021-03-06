@@ -4,7 +4,7 @@
 
 .array-container {
     /* position: absolute; */
-    left: 100px;
+    /* left: 100px; */
     /* top: 100px; */
     /* border: 1px solid red;  */
     min-height: 500px; /*fit-content;*/
@@ -12,7 +12,7 @@
     padding: 10px;
     margin-left: auto;
     margin-right: auto;
-    overflow: auto;
+    /* overflow: auto; */
     border: 1px solid green; 
 
   }

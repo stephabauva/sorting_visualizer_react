@@ -5,7 +5,6 @@ import { doMergeSort } from '../sortingAlgorithms/MergeSort'
 import { doQuickSort } from '../sortingAlgorithms/QuickSort'
 import { doBubbleSort } from '../sortingAlgorithms/BubbleSort'
 import { doInsertionSort } from '../sortingAlgorithms/InsertionSort'
-import store from '../store'
 
 /* ***** making this component check ig an element of the store has changed ******
 links:
@@ -295,7 +294,7 @@ class SortingVisualizer extends React.Component {
                 style={{
                     backgroundColor: INIT_COLOR,
                     height: `${value}px`,
-                    width: `${(1.5/2)*window.innerWidth/this.state.array.length}px`,
+                    width: `${(1.5/3)*window.innerWidth/this.state.array.length}px`,
                 }}></div>
             ))}
         </div> ;

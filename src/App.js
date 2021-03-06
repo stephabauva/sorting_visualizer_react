@@ -1,4 +1,6 @@
-import SimpleMenu from "./components/Menu"
+import Particles from 'react-particles-js';
+import particlesConfig from './config/particlesConfig';
+// import SimpleMenu from "./components/Menu"
 import InputArraySlider from "./components/ArraySlider"
 import InputSpeedSlider from "./components/SpeedSlider"
 import Explanations from "./components/Explanations"
@@ -25,16 +27,18 @@ function App(props) {
   //   />
   // ));
   return (
-    <div className="App">
+    <div className="App" style={{backgroundcolor: 'turquoise', position: 'relative', overflow: "hidden" }}>
+      {/* <div style={{ position: 'absolute'}}>
+        <Particles height="100vh" width="100vw" params={particlesConfig} />
+      </div> */}
       <div className="appName"><h1>Sorting Visualizer</h1></div>
         <div id="topbar">
             <div id="slider-button-container"><InputArraySlider /></div>
             <div id="slider-button-container"><InputSpeedSlider /></div>
             <div id="explanations-block"><Explanations /></div>
-            {/* <div id="menu-container">{menuList}</div> */}
         </div>
-        {/* <div id="languages-container"><Languages /></div> #for future implementation */}
         <div id="visualizer-container"><SortingVisualizer /></div>
+      
     </div>
 
   );
