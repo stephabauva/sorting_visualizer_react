@@ -242,12 +242,14 @@ class SortingVisualizer extends React.Component {
                     const barOneStyleThree = arrayBars[barIdxThree].style;
                     barOneStyleThree.backgroundColor= OVERWRITTE_COLOR; 
                     await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
+                    break;
                 case 4:
-                    const [command, barOneIdx, key] = animations[i];
+                    const [_, barOneIdx, key] = animations[i];
                     const barOneStyle4 = arrayBars[barOneIdx].style;
                     barOneStyle4.height = `${key}px`;
                     await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
                     break;
+                default:
                 } 
                 if (i === animations.length-1 ) {
                     this.finalViz();

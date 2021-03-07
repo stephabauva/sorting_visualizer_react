@@ -1,5 +1,3 @@
-import store from '../store'
-
 export default function Explanations(props) {
    
 return(
