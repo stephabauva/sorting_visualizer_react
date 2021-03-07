@@ -16,7 +16,6 @@ export function doInsertionSort(init_array) {
         }
         array[j+1]=key;
         animations.push([4, j+1, key]);
-        // animations.push([0, j+1, key]);
     }
     console.log('sorted:', array);
     return animations

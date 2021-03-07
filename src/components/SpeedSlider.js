@@ -11,7 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300 + theme.spacing(3) * 2,
-    padding: 7,
+    paddingLeft: 20,
   },
   margin: {
     height: theme.spacing(1),
@@ -68,17 +68,15 @@ const PrettoSlider = withStyles({ //styled-component ?
 export default function InputSpeedSlider(props) {
   const INITIAL_SPEED = store.getState()['sortSpeedReducer']['niceSpeed']
   const classes = useStyles();
-    // create inital slider value (0) and a function to update it
-  const [sliderValue, setSliderValue] = React.useState(0);
+  const [_, setSliderValue] = React.useState(0);
 
   //handleSpeedChange gets the value from the slider
   const handleSpeedChange = (event, newValue) => {
-    // console.log(newValue);
     const lever = 1;
     const newSpeed = newValue * lever;
     if (newSpeed >= 0) {
       setSliderValue(newSpeed); //updates the previous value of the slider
-      // dispatch the new list: update the store with our new list
+      // dispatch the new list: update the store with the new speed
       store.dispatch({
         type: 'SET_SORT_SPEED',
         payload: newSpeed
@@ -87,7 +85,7 @@ export default function InputSpeedSlider(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
       <div className={classes.margin} />
       <Typography gutterBottom>Slow the sorting speed down (ms)</Typography>
       <PrettoSlider valueLabelDisplay="auto"  defaultValue={INITIAL_SPEED} max={1000} onChange={handleSpeedChange}/>

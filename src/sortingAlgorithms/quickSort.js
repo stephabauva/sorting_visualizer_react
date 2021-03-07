@@ -1,11 +1,3 @@
-const INIT_COLOR = 'turquoise';
-const PIVOT_VALUE_COLOR = 'red';
-const COMPARING_COLOR = '#8000ff';
-const SWAPING_COLOR = 'green';
-const FINAL_SORTED_COLOR = '#7dff84';
-const ANIMATION_SPEED_MS = 10;
-
-
 export function doQuickSort(array) {;
     const animations = [];
     console.log('quick array:', array);
@@ -49,6 +41,5 @@ function swap(arr, a, b, animations) {
     animations.push([-2, a, b]);
     animations.push([-3, a, b]);
     
-    // console.log(arr);
 }
 

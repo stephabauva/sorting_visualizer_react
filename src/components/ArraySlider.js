@@ -11,7 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300 + theme.spacing(3) * 2,
-    padding: 7,
+    padding: 0,
   },
   margin: {
     height: theme.spacing(1),
@@ -34,7 +34,7 @@ ValueLabelComponent.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const PrettoSlider = withStyles({ //styled-component ?
+const PrettoSlider = withStyles({ 
   root: {
     color: '#52af77',
     height: 8,
@@ -68,7 +68,7 @@ const PrettoSlider = withStyles({ //styled-component ?
 export default function InputArraySlider(props) {
   const classes = useStyles();
     // create inital slider value (0) and a function to update it
-  const [sliderValue, setSliderValue] = React.useState(0);
+  const [_, setSliderValue] = React.useState(0);
 
   //handleSliderChange gets the value from the slider
   const handleSliderChange = (event, newValue) => {
@@ -88,8 +88,8 @@ export default function InputArraySlider(props) {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.margin} />
+    <div className={classes.root} >
+      <div className={classes.margin}/>
       <Typography gutterBottom>Change the size of the chart</Typography>
       <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={1} min={1} max={300} onChange={handleSliderChange}/>
     </div>

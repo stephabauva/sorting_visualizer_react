@@ -8,7 +8,7 @@ import { doQuickSort } from '../sortingAlgorithms/QuickSort'
 import { doBubbleSort } from '../sortingAlgorithms/BubbleSort'
 import { doInsertionSort } from '../sortingAlgorithms/InsertionSort'
 
-/* ***** making this component check ig an element of the store has changed ******
+/* ***** making this component check if an element of the store has changed ******
 links:
 https://stackoverflow.com/questions/36557089/how-to-listen-for-specific-property-changes-in-redux-store-after-an-action-is-di
 https://stackoverflow.com/questions/36557089/how-to-listen-for-specific-property-changes-in-redux-store-after-an-action-is-di 
@@ -16,20 +16,14 @@ https://stackoverflow.com/questions/36557089/how-to-listen-for-specific-property
 *********************************** */
 
 const mapStateToProps = (...args) => { // the store is accessible because we added Provider in index.js
-    // console.log('SortingViz mapStateToProps:',state.listState);
-    console.log('...args', args)
-    console.log('args[0]', args[0])
-    console.log("args[0]['listReducer']['listState']", args[0]['listReducer']['listState'])
-    console.log("args[0]['sortSpeedReducer']['sortSpeed']", args[0]['sortSpeedReducer']['sortSpeed'])
     return { 
         myStoredList: args[0]['listReducer']['listState'], 
         initialSortingSpeed: args[0]['sortSpeedReducer']['niceSpeed'],
         myStoredSpeed: args[0]['sortSpeedReducer']['sortSpeed'] 
     };
-    
   };
 
-// This is the main color of the array bars.
+// This is the main colors of the array bars.
 const INIT_COLOR = 'turquoise';
 const RED_COLOR = 'red';
 const SELECT_COLOR = '#f5bf42';
@@ -42,19 +36,12 @@ class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { array: [], speed: ''};
-        // console.log('this.array:', this.state.array);
       }
     /* compare previous list in store to the new actual list generated */
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('prevprops:', prevProps); // -> { myStoredList: Array(..), dispatch: f }
-        // console.log('this.props:', this.props);
         if (prevProps.myStoredList !== this.props.myStoredList) {
-            // Do whatever you want
-            // console.log('previous list:',prevProps.lmyStoredList);
-            // console.log('actual list:',this.props.myStoredList);
             this.setState({ array: this.props.myStoredList });
         }
-        // console.log('ANIMATION_SPEED_MS BEFORE', ANIMATION_SPEED_MS)
         //if the speed slider was not moved (myStoredSpeed is undefined), just use the default value (35 in SpeedReducer.js)
         if (! ANIMATION_SPEED_MS) {
             ANIMATION_SPEED_MS = prevProps.initialSortingSpeed ;
@@ -83,17 +70,6 @@ class SortingVisualizer extends React.Component {
                 const barTwoStyle = arrayBars[barTwoIdx].style;
                 // if i is a multiple of 3, change the color (secondary), otherwise let its primary color
                 const color = i % 3 === 0 ? RED_COLOR : INIT_COLOR;
-                // The conditional (ternary) operator '?' is the only JavaScript operator that takes three operands: 
-                // a condition followed by a question mark (?), then an expression to execute if the condition is 
-                // truthy followed by a colon (:), and finally the expression to execute if the condition is falsy. 
-                // This operator is frequently used as a shortcut for the if statement.
-                // link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator#:~:text=The%20conditional%20(ternary)%20operator%20is,if%20the%20condition%20is%20falsy.
-
-                //using a timeout, slowly change the colors of barOne and barTwo
-                // setTimeout( () => {
-                //     barOneStyle.backgroundColor = color;
-                //     barTwoStyle.backgroundColor = color;
-                // }, i * ANIMATION_SPEED_MS);
                 barOneStyle.backgroundColor = color;
                 barTwoStyle.backgroundColor = color;
                 endViz++;
@@ -101,13 +77,6 @@ class SortingVisualizer extends React.Component {
             } else {
                 //meaning if the remainder of i/3 === 2, then i is the subarray used for the overwritting 
                 const [barOneIdx, newHeight] = animations[i]; // -> [idx to be overwritten, overwritting value], 
-                // setTimeout( () => {
-                //     // then get the idx, get the value
-                    
-                //     // overwritte the old value
-                //     // arrayBars[barOneIdx].style.backgroundColor = OVERWRITTE_COLOR;
-                //     arrayBars[barOneIdx].style.height = `${newHeight}px`; 
-                // }, i * ANIMATION_SPEED_MS);
                 arrayBars[barOneIdx].style.backgroundColor = OVERWRITTE_COLOR;
                 arrayBars[barOneIdx].style.height = `${newHeight}px`; 
                 await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
@@ -258,25 +227,17 @@ class SortingVisualizer extends React.Component {
           
         }
     
-    //finally, color the sorted list in green
+    //finally, colors the sorted list in green
   async finalViz() {
       console.log('in final viz');
         const arrayBars = document.getElementsByClassName('array-bar');
             for (let f=0; f<arrayBars.length; f++) {
-                // setTimeout( () => {
-                //     const barStyle = arrayBars[f].style;
-                //     barStyle.backgroundColor = FINAL_SORTED_COLOR;
-                // }, f * ANIMATION_SPEED_MS * 2);
                 const barStyle = arrayBars[f].style;
                 barStyle.backgroundColor = FINAL_SORTED_COLOR;
                 await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
             } 
             await new Promise((resolve) => setTimeout(resolve, 800));
             for (let f = arrayBars.length-1; f >= 0; f--) {
-                // setTimeout( () => {
-                //     const barStyle = arrayBars[f].style;
-                //     barStyle.backgroundColor = FINAL_SORTED_COLOR;
-                // }, f * ANIMATION_SPEED_MS * 2);
                 const barStyle = arrayBars[f].style;
                 barStyle.backgroundColor = INIT_COLOR;
                 await new Promise((resolve) => setTimeout(resolve, 20));
