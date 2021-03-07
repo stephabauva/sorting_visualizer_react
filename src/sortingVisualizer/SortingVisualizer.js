@@ -263,7 +263,7 @@ class SortingVisualizer extends React.Component {
                     backgroundColor: INIT_COLOR,
                     height: `${value}px`,
                     width: `${(1.5/3)*window.innerWidth/this.state.array.length}px`,
-                    marginTop: `${50}px`
+                    marginTop: `${50}px`,
                 }}></div>
             ))}
         </div> ;
