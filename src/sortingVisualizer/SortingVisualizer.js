@@ -1,12 +1,14 @@
-import Particles from 'react-particles-js';
-import particlesConfig from '../config/particlesConfig';
 import React from "react";
 import './SortingVisualizer.css';
 import { connect } from 'react-redux';
+
 import { doMergeSort } from '../sortingAlgorithms/MergeSort'
 import { doQuickSort } from '../sortingAlgorithms/QuickSort'
 import { doBubbleSort } from '../sortingAlgorithms/BubbleSort'
 import { doInsertionSort } from '../sortingAlgorithms/InsertionSort'
+
+import Particles from 'react-particles-js';
+import particlesConfig from '../config/particlesConfig';
 
 /* ***** making this component check if an element of the store has changed ******
 links:
@@ -23,7 +25,7 @@ const mapStateToProps = (...args) => { // the store is accessible because we add
     };
   };
 
-// This is the main colors of the array bars.
+//  This is the main colors of the array bars.
 const INIT_COLOR = 'turquoise';
 const RED_COLOR = 'red';
 const SELECT_COLOR = '#f5bf42';
