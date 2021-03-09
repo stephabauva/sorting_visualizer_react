@@ -1,5 +1,4 @@
 export function doMergeSort(array) {
-  console.log('merge array:', array);
     const animations = [];
     if (array.length <= 1) return array;
     const auxiliaryArray = array.slice();

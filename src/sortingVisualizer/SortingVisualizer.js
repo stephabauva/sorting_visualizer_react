@@ -47,12 +47,10 @@ class SortingVisualizer extends React.Component {
         //if the speed slider was not moved (myStoredSpeed is undefined), just use the default value (35 in SpeedReducer.js)
         if (! ANIMATION_SPEED_MS) {
             ANIMATION_SPEED_MS = prevProps.initialSortingSpeed ;
-            console.log('ANIMATION_SPEED_MS initial', ANIMATION_SPEED_MS)
         }    
         //if the slider was moved then use the current new speed slider value
         if (prevProps.myStoredSpeed !== this.props.myStoredSpeed) {
             ANIMATION_SPEED_MS = this.props.myStoredSpeed 
-            console.log('ANIMATION_SPEED_MS AFTER', ANIMATION_SPEED_MS)
         }
     }
     /* ************************************************************ */
@@ -95,24 +93,17 @@ class SortingVisualizer extends React.Component {
 
     async quickSort() {
         const animations = doQuickSort(this.state.array);
-        console.log(animations);
-        console.log('sorted:',animations);
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar'); 
             if (animations[i].length === 2) {
-                const [command, pivotIdx] =  animations[i];
-                console.log('cmd pvtidx:', command, pivotIdx);
+                const [_, pivotIdx] =  animations[i];
                 const barPivotStyle = arrayBars[pivotIdx].style;
                 barPivotStyle.backgroundColor = RED_COLOR;
                 await new Promise((resolve) => setTimeout(resolve, ANIMATION_SPEED_MS));
             } else {
-            console.log('else:', i);
             const [command, barOneIdx, barTwoIdx] = animations[i];
-            console.log(command, barOneIdx, barTwoIdx);
             const barOneStyle = arrayBars[barOneIdx].style;
             const barTwoStyle = arrayBars[barTwoIdx].style;
-            console.log('barOneSTyle:', barOneStyle, 'barTwoStyle:', barTwoStyle);
-            console.log(typeof command);
             switch(command) {
                 case -2:
                     barOneStyle.backgroundColor = SWAP_COLOR;
@@ -143,17 +134,13 @@ class SortingVisualizer extends React.Component {
     }
 
     async bubbleSort() {
-        console.log(this.state.array);
         const animations = doBubbleSort(this.state.array);
-        console.log(animations);
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar'); 
             const [command, barOneIdx, barTwoIdx] = animations[i];
-            console.log('barTwoIdx:', barTwoIdx, 'arrayBars.length', arrayBars.length);
             if (barTwoIdx === arrayBars.length) {
                 continue;
             }
-            console.log(i, command, barOneIdx, barTwoIdx);
             const barOneStyle = arrayBars[barOneIdx].style;
             const barTwoStyle = arrayBars[barTwoIdx].style;
             switch(command) {
@@ -231,7 +218,6 @@ class SortingVisualizer extends React.Component {
     
     //finally, colors the sorted list in green
   async finalViz() {
-      console.log('in final viz');
         const arrayBars = document.getElementsByClassName('array-bar');
             for (let f=0; f<arrayBars.length; f++) {
                 const barStyle = arrayBars[f].style;

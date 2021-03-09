@@ -72,7 +72,6 @@ export default function InputArraySlider(props) {
 
   //handleSliderChange gets the value from the slider
   const handleSliderChange = (event, newValue) => {
-    // console.log(newValue);
     const lever = 1;
     const pumpedValue = newValue * lever;
     if (pumpedValue > 0) {

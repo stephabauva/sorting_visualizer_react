@@ -2,7 +2,6 @@ export function doBubbleSort(array) {
     const n = array.length;
     const animations = [];
     compare(array, n, animations);
-    console.log('sorted:', array);
     return animations;
 
     function compare(array, n, animations) {

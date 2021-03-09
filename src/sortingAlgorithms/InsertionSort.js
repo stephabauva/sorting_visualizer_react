@@ -1,7 +1,6 @@
 export function doInsertionSort(init_array) {
     const animations = [];
     const array = init_array.slice();
-    console.log(array);
     for (let i=1; i<array.length; i++) {
         let key = array[i];
         animations.push([1, i]); //red
@@ -17,6 +16,5 @@ export function doInsertionSort(init_array) {
         array[j+1]=key;
         animations.push([4, j+1, key]);
     }
-    console.log('sorted:', array);
     return animations
 }
