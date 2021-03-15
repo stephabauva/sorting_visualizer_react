@@ -1,6 +1,7 @@
 import React from "react";
-import './SortingVisualizer.css';
 import { connect } from 'react-redux';
+import './SortingVisualizer.css';
+
 
 import { doMergeSort } from '../sortingAlgorithms/MergeSort'
 import { doQuickSort } from '../sortingAlgorithms/QuickSort'
