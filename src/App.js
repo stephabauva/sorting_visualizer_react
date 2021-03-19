@@ -1,4 +1,3 @@
-
 import InputArraySlider from "./components/ArraySlider"
 import InputSpeedSlider from "./components/SpeedSlider"
 import Explanations from "./components/Explanations"
