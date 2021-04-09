@@ -38,6 +38,5 @@ function swap(arr, a, b, animations) {
     arr[b] = temp;
     animations.push([-2, a, b]);
     animations.push([-3, a, b]);
-    
 }
 
