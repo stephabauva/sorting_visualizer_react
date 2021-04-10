@@ -20,7 +20,6 @@ function App(props) {
         </div>
         <div id="visualizer-container"><SortingVisualizer /></div>
     </div>
-
   );
 }
 
