@@ -2,8 +2,9 @@ import InputArraySlider from "./components/ArraySlider"
 import InputSpeedSlider from "./components/SpeedSlider"
 import Explanations from "./components/Explanations"
 import SortingVisualizer from "./sortingVisualizer/SortingVisualizer"
-import React from "react";
 import './App.css';
+import React from "react";
+
 import {Helmet} from 'react-helmet';
 
 function App(props) {
